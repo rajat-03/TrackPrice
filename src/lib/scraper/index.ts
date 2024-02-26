@@ -61,6 +61,9 @@ export async function scrapeAmazonProduct(productUrl: string) {
         //console.log({ title, currentPrice, originialPrice, outOfStock, imageUrls,currency ,discountRate})
 
         const description = extractDescription($)
+
+        const category = $('#wayfinding-breadcrumbs_feature_div ul.a-unordered-list li:last-child a').text().trim();
+
         //construct data object with scraped information
         const data = {
             url: productUrl,
@@ -71,7 +74,7 @@ export async function scrapeAmazonProduct(productUrl: string) {
             originalPrice: Number(originialPrice),
             priceHistory: [],
             discountRate: Number(discountRate),
-            category: 'category',
+            category: category|| 'category',
             reviewsCount: 100,
             stars: 4.5,
             isOutOfStock: outOfStock,
@@ -81,7 +84,7 @@ export async function scrapeAmazonProduct(productUrl: string) {
             averagePrice: Number(currentPrice) || Number(originialPrice),
         }
 
-        // console.log(data);
+        //console.log(data);
         return data;
 
     } catch (error: any) {
