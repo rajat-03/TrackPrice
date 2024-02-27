@@ -20,9 +20,9 @@ const ProductDetails = async ({ params: { id } }: Props) => {
   if (!product) redirect('/')
 
   return (
-    
+    //product main container
     <div className="product-container"> 
-
+      {/* product image,title,prices and track */}
       <div className="flex gap-28 xl:flex-row flex-col">
         <div className="product-image">
           <Image
@@ -33,7 +33,7 @@ const ProductDetails = async ({ params: { id } }: Props) => {
             className="mx-auto"
           />
         </div>
-          
+          {/* title */}
         <div className="flex-1 flex flex-col">
           <div className="flex justify-between items-start gap-5 flex-wrap pb-6">
             <div className="flex flex-col gap-3">
@@ -97,7 +97,7 @@ const ProductDetails = async ({ params: { id } }: Props) => {
 
             </div>
 
-            {/* //number of start */}
+        
             <div className="flex flex-col gap-4">
               <div className="flex gap-3">
                 <div className="product-stars">
@@ -111,6 +111,7 @@ const ProductDetails = async ({ params: { id } }: Props) => {
                     {product.stars}
                   </p>
                 </div>
+
                 <div className="product-reviews">
                   <Image
                     src={'/assets/icons/comment.svg'}
@@ -130,7 +131,6 @@ const ProductDetails = async ({ params: { id } }: Props) => {
               </p>
             </div>
           </div>
-
 
           <div className="my-7 flex flex-col gap-5">
             <div className="flex gap-5 flex-wrap">
@@ -157,22 +157,23 @@ const ProductDetails = async ({ params: { id } }: Props) => {
             </div>
           </div>
 
-          <Modal />
+          <Modal productId={id}/> {/* track price button */}
+
         </div>
       </div>
+      {/* end of product image,title,prices and track */}
 
+      {/* product description and buy now */}
       <div className="flex flex-col gap-16">
         <div className="flex flex-col gap-5">
           <h3 className="text-2xl text-secondary font-semibold">
             Product Description
           </h3>
-
           <div className="flex flex-col gap-4">
             {product?.description?.split('\n')}
-
           </div>
-
         </div>
+
         <button className="btn w-fit mx-auto flex items-center justify-center gap-3 min-w-[200px]">
           <Image
             src="/assets/icons/bag.svg"
@@ -180,12 +181,14 @@ const ProductDetails = async ({ params: { id } }: Props) => {
             width={22}
             height={22}
           />
-
           <Link href="/" className="text-base text-white">
             Buy Now
           </Link>
         </button>
       </div>
+      {/* end of product description and buy now */}
+
+      {/* similar products */}
       {similarProducts && similarProducts?.length > 0 && (
         <div className="py-14 flex flex-col gap-2 w-full">
           <p className="section-text">Similar Products</p>
@@ -197,6 +200,8 @@ const ProductDetails = async ({ params: { id } }: Props) => {
           </div>
         </div>
       )}
+      {/* end of similar products */}
+
     </div>
   )
 }

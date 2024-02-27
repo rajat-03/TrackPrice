@@ -5,6 +5,8 @@ import { Product } from "../models/product.model";
 import { connectToDB } from "../mongoose";
 import { scrapeAmazonProduct } from "../scraper";
 import { getAveragePrice, getHighestPrice, getLowestPrice } from "../utils";
+import { User } from "@/types";
+import { generateEmailBody, sendEmail } from "../nodemailer";
 
 //Product page scraping logic
 export const scrapeAndStoreProduct = async (productUrl: string) => {
@@ -94,4 +96,35 @@ export const getSimilarProducts = async (productId: string) => {
     } catch (error) {
         console.log("Error in getting similar products!!", error)        
     }
+}
+
+export const addUserEmailToProduct = async (productId: string, userEmail: string) =>{
+
+    try {
+        //Add the user email to the product's user list
+        //send an email to the user
+
+        const product = await Product.findById(productId);
+
+        if(!product) return;
+
+        //check for the user that if the user is already in the list of tracking the product
+        const userAlreadyTracking = product.users.some((user: User) => user.email === userEmail);
+
+        if(!userAlreadyTracking) {
+            product.users.push({email: userEmail});
+            await product.save();
+            
+            // this function is used to generate the email body that will be sent to the userfunc
+            const emailContent = await generateEmailBody(product, 'WELCOME');
+
+            // this function is used to send the email to the user using nodemailer
+            await sendEmail(emailContent,[userEmail])
+
+        }
+        
+    } catch (error) {
+        
+    }
+
 }
