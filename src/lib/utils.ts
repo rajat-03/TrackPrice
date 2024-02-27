@@ -51,9 +51,11 @@ export function extractStarRating($: any){
 
 // Extracts description from two possible elements from amazon
 export async function extractDescription($: any) {
-  const data = $('#feature-bullets ul.a-unordered-list.a-vertical.a-spacing-mini li').map(function(this: any) {
-    return $(this).text();
-}).get().join('\n');
+  const data = $('#feature-bullets ul.a-unordered-list.a-vertical.a-spacing-mini li')
+    .map(function(this: any) {
+      return '• ' + $(this).text().trim() + '\n';
+    })
+    .get().join('');
 
   return data;
 }
