@@ -181,7 +181,7 @@ const ProductDetails = async ({ params: { id } }: Props) => {
             width={22}
             height={22}
           />
-          <Link href="/" className="text-base text-white">
+          <Link href={`${product.url}`} target="_blank" className="text-base text-white">
             Buy Now
           </Link>
         </button>
@@ -193,7 +193,7 @@ const ProductDetails = async ({ params: { id } }: Props) => {
         <div className="py-14 flex flex-col gap-2 w-full">
           <p className="section-text">Similar Products</p>
 
-          <div className="flex flex-wrap gap-10 mt-7 w-full">
+          <div className="flex flex-wrap gap-8 mt-7 w-full">
             {similarProducts.map((product) => (
               <ProductCard key={product._id} product={product} />
             ))}

@@ -8,6 +8,7 @@ import { getAveragePrice, getHighestPrice, getLowestPrice } from "../utils";
 import { User } from "@/types";
 import { generateEmailBody, sendEmail } from "../nodemailer";
 
+
 //Product page scraping logic
 export const scrapeAndStoreProduct = async (productUrl: string) => {
     if (!productUrl) return;
@@ -38,17 +39,16 @@ export const scrapeAndStoreProduct = async (productUrl: string) => {
             } //Update the product object with the new price history
         }
 
+
         const newProduct = await Product.findOneAndUpdate(
             { url: scrapedProduct.url },
             product,
             { upsert: true, new: true }
-          )
+        );
 
-
-        if (newProduct) {
-            console.log("Product created/updated successfully")
-            revalidatePath(`/products/${newProduct._id}`); //Revalidate the products API endpoint
-        }
+        console.log("Product created/updated successfully");
+        revalidatePath(`/products/${newProduct._id}`); //Revalidate the products API endpoint
+     
 
     } catch (error: any) {
         throw new Error(`Failed to create/update product: ${error.message}`)
@@ -90,7 +90,7 @@ export const getSimilarProducts = async (productId: string) => {
 
         const similarProducts = await Product.find({
             _id:{$ne: productId},
-        }).limit(3).sort({updatedAt: -1}).exec(); //Get the 3 most recently updated products
+        }).limit(4).sort({updatedAt: -1}).exec(); //Get the 3 most recently updated products
 
         return similarProducts;
     } catch (error) {

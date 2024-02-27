@@ -13,8 +13,6 @@ const Notification = {
     THRESHOLD_MET: 'THRESHOLD_MET',
 }
 
-
-
 // this function is used to generate the email body that will be sent to the user
 export const generateEmailBody =  async (product: EmailProductInfo, type: NotificationType) => {
     const THRESHOLD_PERCENTAGE = 20;

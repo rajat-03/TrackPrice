@@ -46,7 +46,7 @@ const allProducts = await getAllProducts();
 
       {/* Trending section */}
       <section className="trending-section">
-        <h2 className="section-text">Trending</h2>
+        <h2 className="section-text">Items You May Like</h2>
 
         <div className="flex flex-wrap gap-x-8 gap-y-16">
 

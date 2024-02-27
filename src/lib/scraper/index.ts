@@ -60,7 +60,7 @@ export async function scrapeAmazonProduct(productUrl: string) {
 
         //console.log({ title, currentPrice, originialPrice, outOfStock, imageUrls,currency ,discountRate})
 
-        const description = extractDescription($)
+        const description = await extractDescription($)
 
         const category = $('#wayfinding-breadcrumbs_feature_div ul.a-unordered-list li:last-child a').text().trim();
 
