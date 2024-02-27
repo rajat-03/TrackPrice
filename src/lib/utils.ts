@@ -36,6 +36,19 @@ export function extractCurrency(element: any) {
   return currencyText ? currencyText : "";
 }
 
+//Extracts and returns the number of reviews from an element.
+export function extractReviewsCount(element: any): number {
+  const reviewsCountText = element.text().replace(/,/g, '');
+  return Number(reviewsCountText.match(/\d+/)?.[0]) || 0;
+}
+
+export function extractStarRating($: any){
+  const starRatingText = $('.a-declarative .a-size-base.a-color-base').text().trim();
+  const starRatingMatch = starRatingText.match(/\d+(\.\d+)?/);
+  const starRating = starRatingMatch ? parseFloat(starRatingMatch[0]) : 0;
+  return Number(starRating);
+}
+
 // Extracts description from two possible elements from amazon
 export function extractDescription($: any) {
   // these are possible elements holding description of the product

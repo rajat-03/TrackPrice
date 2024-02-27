@@ -1,6 +1,6 @@
 import axios from "axios";
 import * as cheerio from "cheerio"; // used to parse the HTML and extract data from it
-import { extractCurrency, extractDescription, extractPrice } from "../utils";
+import { extractCurrency, extractDescription, extractPrice, extractReviewsCount, extractStarRating } from "../utils";
 
 export async function scrapeAmazonProduct(productUrl: string) {
     if (!productUrl) return;
@@ -64,6 +64,10 @@ export async function scrapeAmazonProduct(productUrl: string) {
 
         const category = $('#wayfinding-breadcrumbs_feature_div ul.a-unordered-list li:last-child a').text().trim();
 
+        const reviewsCount = extractReviewsCount($('#acrCustomerReviewText'));
+
+        const starRating = extractStarRating($);
+
         //construct data object with scraped information
         const data = {
             url: productUrl,
@@ -75,8 +79,8 @@ export async function scrapeAmazonProduct(productUrl: string) {
             priceHistory: [],
             discountRate: Number(discountRate),
             category: category|| 'category',
-            reviewsCount: 100,
-            stars: 4.5,
+            reviewsCount: reviewsCount,
+            stars: starRating,
             isOutOfStock: outOfStock,
             description,
             lowestPrice: Number(currentPrice) || Number(originialPrice),

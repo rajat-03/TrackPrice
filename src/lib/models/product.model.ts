@@ -19,6 +19,7 @@ const productSchema = new Schema({
     discountRate: { type: Number },
     description: { type: String },
     category: { type: String },
+    stars:{type:Number,default:0},
     reviewsCount: { type: Number },
     isOutOfStock: { type: Boolean, default: false },
     users: [
