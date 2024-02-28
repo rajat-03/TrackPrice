@@ -75,7 +75,7 @@ export const getAllProducts = async () => {
     try {
         await connectToDB();
         //find products and sort by the most recently updated
-        const products = await Product.find().sort({updatedAt: -1}).limit(8).exec();
+        const products = await Product.find().sort({updatedAt: -1}).exec();
         return products;
     } catch (error) {
         console.log("Error in getting all products!!", error)        
@@ -91,7 +91,7 @@ export const getSimilarProducts = async (productId: string) => {
 
         const similarProducts = await Product.find({
             _id:{$ne: productId},
-        }).limit(4).sort({updatedAt: -1}).exec(); //Get the 3 most recently updated products
+        }).limit(4).sort({updatedAt: -1}).exec(); //Get the 4 most recently updated products
 
         return similarProducts;
     } catch (error) {
