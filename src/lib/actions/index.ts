@@ -74,7 +74,8 @@ export const getProductByID = async (productId: string) =>{
 export const getAllProducts = async () => {
     try {
         await connectToDB();
-        const products = await Product.find();
+        //find products and sort by the most recently updated
+        const products = await Product.find().sort({updatedAt: -1}).limit(8).exec();
         return products;
     } catch (error) {
         console.log("Error in getting all products!!", error)        
