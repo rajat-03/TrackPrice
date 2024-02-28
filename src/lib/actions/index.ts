@@ -7,8 +7,6 @@ import { scrapeAmazonProduct } from "../scraper";
 import { getAveragePrice, getHighestPrice, getLowestPrice } from "../utils";
 import { User } from "@/types";
 import { generateEmailBody, sendEmail } from "../nodemailer";
-import { redirect } from 'next/navigation';
-import { cp } from "fs";
 
 
 //Product page scraping logic
@@ -104,8 +102,6 @@ export const addUserEmailToProduct = async (productId: string, userEmail: string
 
     try {
         //Add the user email to the product's user list
-        //send an email to the user
-
         const product = await Product.findById(productId);
 
         if(!product) return;
@@ -126,7 +122,7 @@ export const addUserEmailToProduct = async (productId: string, userEmail: string
         }
         
     } catch (error) {
-        
+        console.log("Error in adding user email to product!!", error)
     }
 
 }

@@ -53,7 +53,7 @@ export function extractStarRating($: any){
 export async function extractDescription($: any) {
   const data = $('#feature-bullets ul.a-unordered-list.a-vertical.a-spacing-mini li')
     .map(function(this: any) {
-      return '• ' + $(this).text().trim() + '\n';
+      return ' • ' + $(this).text().trim() + '\n';
     })
     .get().join('');
 

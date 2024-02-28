@@ -83,8 +83,10 @@ export const generateEmailBody =  async (product: EmailProductInfo, type: Notifi
 // the transport object is configured to send the email using the gmail service
 const transporter = nodemailer.createTransport({
     pool: true,             
-    service: 'hotmail',       
-    port:2525,              
+    service: 'gmail',   
+    host: "smtp.gmail.com",    
+    port:587,   
+    secure:false,           
     auth: {                 
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASSWORD
@@ -97,17 +99,25 @@ export const sendEmail = async (emailContent: EmailContent, sendTo: string[]) =>
 
     // create a nodemailer transporter object which is used to send the email
     const mailOptions = {
-        from: process.env.EMAIL_USER,
+      from:{
+        name:'TrackPrice',
+        address: process.env.EMAIL_USER
+      }, 
         to: sendTo,
         subject: emailContent.subject,
         html: emailContent.body,
     }
 
-    transporter.sendMail(mailOptions, (error:any, info:any) => {
-        if (error) {
-            console.log("Error in sending email!!", error);
-        } else {
-            console.log("Email sent: ", info);
-        }
+    transporter.sendMail({...mailOptions,
+      from: {
+        name: 'TrackPrice',
+        address: process.env.EMAIL_USER || ''
+      }
+    }, (error:any, info:any) => {
+      if (error) {
+        console.log("Error in sending email!!", error);
+      } else {
+        console.log("Email sent: ", info);
+      }
     })
 }
