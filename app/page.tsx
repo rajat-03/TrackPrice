@@ -1,8 +1,9 @@
-import HeroCarousel from "@/components/HeroCarousel"
-import ProductCard from "@/components/ProductCard"
-import Searchbar from "@/components/Searchbar"
-import { getAllProducts } from "@/lib/actions"
+
+import { getAllProducts } from "../lib/actions/index"
 import Image from "next/image"
+import Searchbar from "../components/Searchbar";
+import HeroCarousel from "../components/HeroCarousel";
+import ProductCard from "../components/ProductCard";
 
 
 const Home =async () => {

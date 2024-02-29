@@ -1,6 +1,6 @@
 "use server"
 
-import { EmailContent, EmailProductInfo, NotificationType } from '@/types';
+import { EmailContent, EmailProductInfo, NotificationType } from '../../types';
 import nodemailer from 'nodemailer';
 // nodemailer is a module that allows you to send emails from your server using Node.js
 

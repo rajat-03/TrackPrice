@@ -1,9 +1,9 @@
-import Modal from "@/components/Modal";
-import PriceInfoCard from "@/components/PriceInfoCard";
-import ProductCard from "@/components/ProductCard";
-import { getProductByID, getSimilarProducts } from "@/lib/actions"
-import { formatNumber } from "@/lib/utils";
-import { Product } from "@/types";
+import Modal from "../../../components/Modal"
+import PriceInfoCard from "../../../components/PriceInfoCard";
+import ProductCard from "../../../components/ProductCard";
+import { getProductByID, getSimilarProducts } from "../../../lib/actions/index"
+import { formatNumber } from "../../../lib/utils";
+import { Product } from "../../../types"
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";

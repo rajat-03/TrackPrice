@@ -1,5 +1,5 @@
 
-import { Product } from "@/types"
+import { Product } from "../types"
 import Image from "next/image";
 import Link from "next/link";7
 import React from "react";

@@ -2,6 +2,7 @@ import Image from "next/image"
 import Link from "next/link"
 
 
+
 const navIcons = [
   { src: "/assets/icons/search.svg", alt: "search" },
   { src: "/assets/icons/black-heart.svg", alt: "heart" },
@@ -27,6 +28,7 @@ const Navbar = () => {
           </p>
           
         </Link>
+      
         {/* Logo portion end*/}
 
         {/* Icons portion start*/}

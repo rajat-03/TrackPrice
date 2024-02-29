@@ -1,6 +1,6 @@
 "use client"
 
-import { scrapeAndStoreProduct } from "@/lib/actions";
+import { scrapeAndStoreProduct } from "../lib/actions"
 import { FormEvent, useState } from "react"
 
 //function to check if the link is a valid amazon link
