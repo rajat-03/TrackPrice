@@ -1,22 +1,20 @@
-import Image from "next/image"
-import Link from "next/link"
-
-
+import { revalidatePath } from "next/cache";
+import Image from "next/image";
+import Link from "next/link";
 
 const navIcons = [
   { src: "/assets/icons/search.svg", alt: "search" },
   { src: "/assets/icons/black-heart.svg", alt: "heart" },
   { src: "/assets/icons/user.svg", alt: "user" },
-]
+];
 
 const Navbar = () => {
+  revalidatePath("/");
   return (
     <header className="w-full">
       <nav className="nav">
-
         {/* Logo portion start*/}
         <Link href="/" className="flex items-center gap-1">
-
           <Image
             src="/assets/icons/logo.svg"
             width={27}
@@ -26,9 +24,7 @@ const Navbar = () => {
           <p className="nav-logo">
             Track<span className="text-primary">Price</span>
           </p>
-          
         </Link>
-      
         {/* Logo portion end*/}
 
         {/* Icons portion start*/}
@@ -44,10 +40,9 @@ const Navbar = () => {
           ))}
         </div>
         {/* Icons portion end*/}
-
       </nav>
     </header>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;
