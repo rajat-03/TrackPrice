@@ -88,7 +88,7 @@ export async function scrapeAmazonProduct(productUrl: string) {
             averagePrice: Number(currentPrice) || Number(originialPrice),
         }
 
-        //console.log(data);
+        console.log("Scraped data: ",data);
         return data;
 
     } catch (error: any) {
