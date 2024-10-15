@@ -1,14 +1,15 @@
+"use server"
 import { NextResponse } from "next/server";
 
 import { getLowestPrice, getHighestPrice, getAveragePrice, getEmailNotifType } from "../../../lib/utils";
 import { connectToDB } from "../../../lib/mongoose";
-import {Product} from "../../../lib/models/product.model";
+import { Product } from "../../../lib/models/product.model";
 import { scrapeAmazonProduct } from "../../../lib/scraper";
 import { generateEmailBody, sendEmail } from "../../../lib/nodemailer";
 
 export async function GET(request: Request) {
   try {
-     await connectToDB();
+    await connectToDB();
 
     const products = await Product.find({});
 
@@ -16,7 +17,7 @@ export async function GET(request: Request) {
 
     // ======================== 1 SCRAPE LATEST PRODUCT DETAILS & UPDATE DB
     const updatedProducts = await Promise.all(
-      products.map(async (currentProduct:any) => {
+      products.map(async (currentProduct: any) => {
         // Scrape product
         const scrapedProduct = await scrapeAmazonProduct(currentProduct.url);
 
