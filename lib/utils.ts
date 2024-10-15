@@ -9,24 +9,33 @@ const Notification = {
 
 const THRESHOLD_PERCENTAGE = 40;
 
-// Extracts and returns the price from a list of possible elements.
 export function extractPrice(...elements: any) {
   for (const element of elements) {
+    // Ensure that the element is not empty and contains text
     const priceText = element.text().trim();
 
-    if(priceText) {
-      const cleanPrice = priceText.replace(/[^\d.]/g, '');
+    if (priceText) {
+      // Remove non-numeric characters except the decimal point
+      const cleanPrice = priceText.replace(/[^\d.,]/g, '');
 
-      let firstPrice; 
+      // Handle cases where prices contain commas, by removing commas
+      const priceWithDot = cleanPrice.replace(/,/g, '');
 
-      if (cleanPrice) {
-        firstPrice = cleanPrice.match(/\d+\.\d{2}/)?.[0];
-      } 
+      // Try to extract a valid price format with two decimal points if present
+      let firstPrice = priceWithDot.match(/\d+\.\d{2}/)?.[0];
 
-      return firstPrice || cleanPrice;
+      // If no valid decimal price found, extract only digits
+      if (!firstPrice) {
+        firstPrice = priceWithDot.match(/\d+/)?.[0]; // Extract just the numeric part if no decimal
+      }
+
+      // Return the first valid price found
+      if (firstPrice) {
+        return firstPrice;
+      }
     }
   }
-
+  // Return empty string if no valid price is found
   return '';
 }
 
