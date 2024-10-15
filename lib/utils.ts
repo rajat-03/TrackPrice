@@ -18,7 +18,7 @@ export function extractPrice(...elements: any) {
       // Remove non-numeric characters except the decimal point
       const cleanPrice = priceText.replace(/[^\d.,]/g, '');
 
-      // Handle cases where prices contain commas, by removing commas
+      // Handle cases where prices contain commas
       const priceWithDot = cleanPrice.replace(/,/g, '');
 
       // Try to extract a valid price format with two decimal points if present
@@ -26,17 +26,18 @@ export function extractPrice(...elements: any) {
 
       // If no valid decimal price found, extract only digits
       if (!firstPrice) {
-        firstPrice = priceWithDot.match(/\d+/)?.[0]; // Extract just the numeric part if no decimal
+        firstPrice = priceWithDot.match(/^\d+/)?.[0]; // Extract just the numeric part if no decimal
       }
 
       // Return the first valid price found
       if (firstPrice) {
-        return firstPrice;
+        return parseFloat(firstPrice); // Convert to float
       }
     }
   }
-  // Return empty string if no valid price is found
-  return '';
+
+  // Return null if no valid price is found
+  return null;
 }
 
 // Extracts and returns the currency symbol from an element.
